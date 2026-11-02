@@ -1,0 +1,22 @@
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: cricket_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: cricket_user
+      POSTGRES_PASSWORD: cricket_password
+      POSTGRES_DB: cricket_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - cricket_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U cricket_user -d cricket_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  cricket_data:
