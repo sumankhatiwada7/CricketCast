@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import helmet from "helmet";
 
-import healthRoutes from "./module/health/health.route";
+import healthRoutes from "./module/health/health.route.js";
 
 const app = express();
 
