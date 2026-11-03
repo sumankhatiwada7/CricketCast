@@ -2,21 +2,77 @@
 services:
   postgres:
     image: postgres:16-alpine
-    container_name: cricket_postgres
+    container_name: cricketcast_postgres
     restart: unless-stopped
+
     environment:
       POSTGRES_USER: cricket_user
       POSTGRES_PASSWORD: cricket_password
       POSTGRES_DB: cricket_db
+
     ports:
       - "5432:5432"
+
     volumes:
-      - cricket_data:/var/lib/postgresql/data
+      - cricketcast_data:/var/lib/postgresql/data
+
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U cricket_user -d cricket_db"]
+      test:
+        - CMD-SHELL
+        - pg_isready -U cricket_user -d cricket_db
       interval: 5s
       timeout: 5s
       retries: 5
 
+  backend:
+    build:
+      context: ./backend
+      dockerfile: dockerfile
+      target: development
+
+    container_name: cricketcast_backend
+    restart: unless-stopped
+
+    environment:
+      NODE_ENV: development
+      PORT: 3000
+      DATABASE_URL: postgresql://cricket_user:cricket_password@postgres:5432/cricket_db?schema=public
+
+    ports:
+      - "3000:3000"
+
+    volumes:
+      - ./backend:/app
+      - backend_node_modules:/app/node_modules
+
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: dockerfile
+      target: development
+
+    container_name: cricketcast_frontend
+    restart: unless-stopped
+
+    ports:
+      - "5173:5173"
+
+    volumes:
+      - ./frontend:/app
+      - frontend_node_modules:/app/node_modules
+
+    environment:
+      CHOKIDAR_USEPOLLING: "true"
+      VITE_API_URL: http://localhost:3000
+
+    depends_on:
+      - backend
+
 volumes:
-  cricket_data:
+  cricketcast_data:
+  backend_node_modules:
+  frontend_node_modules:
