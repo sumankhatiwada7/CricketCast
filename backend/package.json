@@ -9,7 +9,7 @@
     "build": "tsc",
     "start": "node dist/server.js",
     "lint": "eslint src",
-    "test": "vitest run"
+    "test": "vitest run --passWithNoTests"
   },
   "keywords": [],
   "author": "",
@@ -41,6 +41,8 @@
     "prisma": "^7.10.1",
     "tsx": "^4.23.15",
     "typescript": "^6.0.3",
-    "typescript-eslint": "^8.72.1"
+    "typescript-eslint": "^8.72.1",
+    "vite": "^8.3.5",
+    "vitest": "^5.1.0"
   }
 }
