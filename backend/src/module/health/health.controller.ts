@@ -14,6 +14,7 @@ export async function healthCheck(req: Request, res: Response) {
       return res.status(200).json(response);
     }
     catch(error){
+        console.error("Health check failed:", error);
         const response: HealthCheckResponse = {
             success: false,
             message: "Health check failed",
