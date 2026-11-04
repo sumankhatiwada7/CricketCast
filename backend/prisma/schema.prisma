@@ -27,6 +27,33 @@ enum PlayerRole {
   ALL_ROUNDER
   WICKET_KEEPER
 }
+enum MatchStatus {
+  SCHEDULED
+  LIVE
+  COMPLETED
+  ABANDONED
+  CANCELLED
+}
+
+enum MatchFormat {
+  T10
+  T20
+  ODI
+  TEST
+  CUSTOM
+}
+
+enum TossDecision {
+  BAT
+  FIELD
+}
+
+enum InningsStatus {
+  NOT_STARTED
+  IN_PROGRESS
+  COMPLETED
+  DECLARED
+}
 
 model User {
   id           String   @id @default(uuid()) @db.Uuid
@@ -56,7 +83,7 @@ model Tournament {
   createdBy   User   @relation(fields: [createdById], references: [id])
 
   teams       TournamentTeam[]
-
+  matches Match[]
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
@@ -72,6 +99,11 @@ model Team {
 
   players      TeamPlayer[]
   tournaments  TournamentTeam[]
+  homeMatches Match[] @relation("MatchTeamA")
+awayMatches Match[] @relation("MatchTeamB")
+tossWins    Match[] @relation("MatchTossWinner")
+battingInnings Innings[] @relation("InningsBattingTeam")
+bowlingInnings Innings[] @relation("InningsBowlingTeam")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -122,4 +154,72 @@ model TournamentTeam {
   @@unique([tournamentId, teamId])
   @@index([teamId])
   @@map("tournament_teams")
+}
+model Match {
+  id           String      @id @default(uuid()) @db.Uuid
+  name         String?
+  format       MatchFormat @default(T20)
+  status       MatchStatus @default(SCHEDULED)
+
+  // Match configuration
+  totalOvers   Int         @default(20)
+  venue        String?
+  scheduledAt  DateTime?
+
+  // Tournament
+  tournamentId String     @db.Uuid
+  tournament   Tournament @relation(fields: [tournamentId], references: [id], onDelete: Cascade)
+
+  // Participating teams
+  teamAId      String @db.Uuid
+  teamBId      String @db.Uuid
+
+  teamA        Team @relation("MatchTeamA", fields: [teamAId], references: [id])
+  teamB        Team @relation("MatchTeamB", fields: [teamBId], references: [id])
+
+  // Toss
+  tossWinnerId String?      @db.Uuid
+  tossWinner   Team?        @relation("MatchTossWinner", fields: [tossWinnerId], references: [id])
+  tossDecision TossDecision?
+
+  // Innings
+  innings      Innings[]
+
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([tournamentId])
+  @@index([status])
+  @@index([scheduledAt])
+  @@map("matches")
+}
+model Innings {
+  id             String       @id @default(uuid()) @db.Uuid
+
+  matchId        String       @db.Uuid
+  match          Match        @relation(fields: [matchId], references: [id], onDelete: Cascade)
+
+  inningsNumber  Int
+
+  battingTeamId  String       @db.Uuid
+  bowlingTeamId  String       @db.Uuid
+
+  battingTeam    Team         @relation("InningsBattingTeam", fields: [battingTeamId], references: [id])
+  bowlingTeam    Team         @relation("InningsBowlingTeam", fields: [bowlingTeamId], references: [id])
+
+  status         InningsStatus @default(NOT_STARTED)
+
+  // Current score summary
+  runs           Int          @default(0)
+  wickets        Int          @default(0)
+
+  // Number of legal balls bowled
+  legalBalls     Int          @default(0)
+
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  @@unique([matchId, inningsNumber])
+  @@index([matchId])
+  @@map("innings")
 }

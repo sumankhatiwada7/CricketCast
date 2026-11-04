@@ -56,7 +56,9 @@ export const ModelName = {
   Team: 'Team',
   Player: 'Player',
   TeamPlayer: 'TeamPlayer',
-  TournamentTeam: 'TournamentTeam'
+  TournamentTeam: 'TournamentTeam',
+  Match: 'Match',
+  Innings: 'Innings'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -147,6 +149,43 @@ export const TournamentTeamScalarFieldEnum = {
 } as const
 
 export type TournamentTeamScalarFieldEnum = (typeof TournamentTeamScalarFieldEnum)[keyof typeof TournamentTeamScalarFieldEnum]
+
+
+export const MatchScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  format: 'format',
+  status: 'status',
+  totalOvers: 'totalOvers',
+  venue: 'venue',
+  scheduledAt: 'scheduledAt',
+  tournamentId: 'tournamentId',
+  teamAId: 'teamAId',
+  teamBId: 'teamBId',
+  tossWinnerId: 'tossWinnerId',
+  tossDecision: 'tossDecision',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MatchScalarFieldEnum = (typeof MatchScalarFieldEnum)[keyof typeof MatchScalarFieldEnum]
+
+
+export const InningsScalarFieldEnum = {
+  id: 'id',
+  matchId: 'matchId',
+  inningsNumber: 'inningsNumber',
+  battingTeamId: 'battingTeamId',
+  bowlingTeamId: 'bowlingTeamId',
+  status: 'status',
+  runs: 'runs',
+  wickets: 'wickets',
+  legalBalls: 'legalBalls',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type InningsScalarFieldEnum = (typeof InningsScalarFieldEnum)[keyof typeof InningsScalarFieldEnum]
 
 
 export const SortOrder = {

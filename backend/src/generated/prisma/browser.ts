@@ -47,3 +47,13 @@ export type TeamPlayer = Prisma.TeamPlayerModel
  * 
  */
 export type TournamentTeam = Prisma.TournamentTeamModel
+/**
+ * Model Match
+ * 
+ */
+export type Match = Prisma.MatchModel
+/**
+ * Model Innings
+ * 
+ */
+export type Innings = Prisma.InningsModel
