@@ -192,6 +192,11 @@ export type TeamWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Team"> | Date | string
   players?: Prisma.TeamPlayerListRelationFilter
   tournaments?: Prisma.TournamentTeamListRelationFilter
+  homeMatches?: Prisma.MatchListRelationFilter
+  awayMatches?: Prisma.MatchListRelationFilter
+  tossWins?: Prisma.MatchListRelationFilter
+  battingInnings?: Prisma.InningsListRelationFilter
+  bowlingInnings?: Prisma.InningsListRelationFilter
 }
 
 export type TeamOrderByWithRelationInput = {
@@ -203,6 +208,11 @@ export type TeamOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   players?: Prisma.TeamPlayerOrderByRelationAggregateInput
   tournaments?: Prisma.TournamentTeamOrderByRelationAggregateInput
+  homeMatches?: Prisma.MatchOrderByRelationAggregateInput
+  awayMatches?: Prisma.MatchOrderByRelationAggregateInput
+  tossWins?: Prisma.MatchOrderByRelationAggregateInput
+  battingInnings?: Prisma.InningsOrderByRelationAggregateInput
+  bowlingInnings?: Prisma.InningsOrderByRelationAggregateInput
 }
 
 export type TeamWhereUniqueInput = Prisma.AtLeast<{
@@ -217,6 +227,11 @@ export type TeamWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"Team"> | Date | string
   players?: Prisma.TeamPlayerListRelationFilter
   tournaments?: Prisma.TournamentTeamListRelationFilter
+  homeMatches?: Prisma.MatchListRelationFilter
+  awayMatches?: Prisma.MatchListRelationFilter
+  tossWins?: Prisma.MatchListRelationFilter
+  battingInnings?: Prisma.InningsListRelationFilter
+  bowlingInnings?: Prisma.InningsListRelationFilter
 }, "id">
 
 export type TeamOrderByWithAggregationInput = {
@@ -252,6 +267,11 @@ export type TeamCreateInput = {
   updatedAt?: Date | string
   players?: Prisma.TeamPlayerCreateNestedManyWithoutTeamInput
   tournaments?: Prisma.TournamentTeamCreateNestedManyWithoutTeamInput
+  homeMatches?: Prisma.MatchCreateNestedManyWithoutTeamAInput
+  awayMatches?: Prisma.MatchCreateNestedManyWithoutTeamBInput
+  tossWins?: Prisma.MatchCreateNestedManyWithoutTossWinnerInput
+  battingInnings?: Prisma.InningsCreateNestedManyWithoutBattingTeamInput
+  bowlingInnings?: Prisma.InningsCreateNestedManyWithoutBowlingTeamInput
 }
 
 export type TeamUncheckedCreateInput = {
@@ -263,6 +283,11 @@ export type TeamUncheckedCreateInput = {
   updatedAt?: Date | string
   players?: Prisma.TeamPlayerUncheckedCreateNestedManyWithoutTeamInput
   tournaments?: Prisma.TournamentTeamUncheckedCreateNestedManyWithoutTeamInput
+  homeMatches?: Prisma.MatchUncheckedCreateNestedManyWithoutTeamAInput
+  awayMatches?: Prisma.MatchUncheckedCreateNestedManyWithoutTeamBInput
+  tossWins?: Prisma.MatchUncheckedCreateNestedManyWithoutTossWinnerInput
+  battingInnings?: Prisma.InningsUncheckedCreateNestedManyWithoutBattingTeamInput
+  bowlingInnings?: Prisma.InningsUncheckedCreateNestedManyWithoutBowlingTeamInput
 }
 
 export type TeamUpdateInput = {
@@ -274,6 +299,11 @@ export type TeamUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   players?: Prisma.TeamPlayerUpdateManyWithoutTeamNestedInput
   tournaments?: Prisma.TournamentTeamUpdateManyWithoutTeamNestedInput
+  homeMatches?: Prisma.MatchUpdateManyWithoutTeamANestedInput
+  awayMatches?: Prisma.MatchUpdateManyWithoutTeamBNestedInput
+  tossWins?: Prisma.MatchUpdateManyWithoutTossWinnerNestedInput
+  battingInnings?: Prisma.InningsUpdateManyWithoutBattingTeamNestedInput
+  bowlingInnings?: Prisma.InningsUpdateManyWithoutBowlingTeamNestedInput
 }
 
 export type TeamUncheckedUpdateInput = {
@@ -285,6 +315,11 @@ export type TeamUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   players?: Prisma.TeamPlayerUncheckedUpdateManyWithoutTeamNestedInput
   tournaments?: Prisma.TournamentTeamUncheckedUpdateManyWithoutTeamNestedInput
+  homeMatches?: Prisma.MatchUncheckedUpdateManyWithoutTeamANestedInput
+  awayMatches?: Prisma.MatchUncheckedUpdateManyWithoutTeamBNestedInput
+  tossWins?: Prisma.MatchUncheckedUpdateManyWithoutTossWinnerNestedInput
+  battingInnings?: Prisma.InningsUncheckedUpdateManyWithoutBattingTeamNestedInput
+  bowlingInnings?: Prisma.InningsUncheckedUpdateManyWithoutBowlingTeamNestedInput
 }
 
 export type TeamCreateManyInput = {
@@ -346,6 +381,11 @@ export type TeamScalarRelationFilter = {
   isNot?: Prisma.TeamWhereInput
 }
 
+export type TeamNullableScalarRelationFilter = {
+  is?: Prisma.TeamWhereInput | null
+  isNot?: Prisma.TeamWhereInput | null
+}
+
 export type TeamCreateNestedOneWithoutPlayersInput = {
   create?: Prisma.XOR<Prisma.TeamCreateWithoutPlayersInput, Prisma.TeamUncheckedCreateWithoutPlayersInput>
   connectOrCreate?: Prisma.TeamCreateOrConnectWithoutPlayersInput
@@ -374,6 +414,78 @@ export type TeamUpdateOneRequiredWithoutTournamentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.TeamUpdateToOneWithWhereWithoutTournamentsInput, Prisma.TeamUpdateWithoutTournamentsInput>, Prisma.TeamUncheckedUpdateWithoutTournamentsInput>
 }
 
+export type TeamCreateNestedOneWithoutHomeMatchesInput = {
+  create?: Prisma.XOR<Prisma.TeamCreateWithoutHomeMatchesInput, Prisma.TeamUncheckedCreateWithoutHomeMatchesInput>
+  connectOrCreate?: Prisma.TeamCreateOrConnectWithoutHomeMatchesInput
+  connect?: Prisma.TeamWhereUniqueInput
+}
+
+export type TeamCreateNestedOneWithoutAwayMatchesInput = {
+  create?: Prisma.XOR<Prisma.TeamCreateWithoutAwayMatchesInput, Prisma.TeamUncheckedCreateWithoutAwayMatchesInput>
+  connectOrCreate?: Prisma.TeamCreateOrConnectWithoutAwayMatchesInput
+  connect?: Prisma.TeamWhereUniqueInput
+}
+
+export type TeamCreateNestedOneWithoutTossWinsInput = {
+  create?: Prisma.XOR<Prisma.TeamCreateWithoutTossWinsInput, Prisma.TeamUncheckedCreateWithoutTossWinsInput>
+  connectOrCreate?: Prisma.TeamCreateOrConnectWithoutTossWinsInput
+  connect?: Prisma.TeamWhereUniqueInput
+}
+
+export type TeamUpdateOneRequiredWithoutHomeMatchesNestedInput = {
+  create?: Prisma.XOR<Prisma.TeamCreateWithoutHomeMatchesInput, Prisma.TeamUncheckedCreateWithoutHomeMatchesInput>
+  connectOrCreate?: Prisma.TeamCreateOrConnectWithoutHomeMatchesInput
+  upsert?: Prisma.TeamUpsertWithoutHomeMatchesInput
+  connect?: Prisma.TeamWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TeamUpdateToOneWithWhereWithoutHomeMatchesInput, Prisma.TeamUpdateWithoutHomeMatchesInput>, Prisma.TeamUncheckedUpdateWithoutHomeMatchesInput>
+}
+
+export type TeamUpdateOneRequiredWithoutAwayMatchesNestedInput = {
+  create?: Prisma.XOR<Prisma.TeamCreateWithoutAwayMatchesInput, Prisma.TeamUncheckedCreateWithoutAwayMatchesInput>
+  connectOrCreate?: Prisma.TeamCreateOrConnectWithoutAwayMatchesInput
+  upsert?: Prisma.TeamUpsertWithoutAwayMatchesInput
+  connect?: Prisma.TeamWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TeamUpdateToOneWithWhereWithoutAwayMatchesInput, Prisma.TeamUpdateWithoutAwayMatchesInput>, Prisma.TeamUncheckedUpdateWithoutAwayMatchesInput>
+}
+
+export type TeamUpdateOneWithoutTossWinsNestedInput = {
+  create?: Prisma.XOR<Prisma.TeamCreateWithoutTossWinsInput, Prisma.TeamUncheckedCreateWithoutTossWinsInput>
+  connectOrCreate?: Prisma.TeamCreateOrConnectWithoutTossWinsInput
+  upsert?: Prisma.TeamUpsertWithoutTossWinsInput
+  disconnect?: Prisma.TeamWhereInput | boolean
+  delete?: Prisma.TeamWhereInput | boolean
+  connect?: Prisma.TeamWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TeamUpdateToOneWithWhereWithoutTossWinsInput, Prisma.TeamUpdateWithoutTossWinsInput>, Prisma.TeamUncheckedUpdateWithoutTossWinsInput>
+}
+
+export type TeamCreateNestedOneWithoutBattingInningsInput = {
+  create?: Prisma.XOR<Prisma.TeamCreateWithoutBattingInningsInput, Prisma.TeamUncheckedCreateWithoutBattingInningsInput>
+  connectOrCreate?: Prisma.TeamCreateOrConnectWithoutBattingInningsInput
+  connect?: Prisma.TeamWhereUniqueInput
+}
+
+export type TeamCreateNestedOneWithoutBowlingInningsInput = {
+  create?: Prisma.XOR<Prisma.TeamCreateWithoutBowlingInningsInput, Prisma.TeamUncheckedCreateWithoutBowlingInningsInput>
+  connectOrCreate?: Prisma.TeamCreateOrConnectWithoutBowlingInningsInput
+  connect?: Prisma.TeamWhereUniqueInput
+}
+
+export type TeamUpdateOneRequiredWithoutBattingInningsNestedInput = {
+  create?: Prisma.XOR<Prisma.TeamCreateWithoutBattingInningsInput, Prisma.TeamUncheckedCreateWithoutBattingInningsInput>
+  connectOrCreate?: Prisma.TeamCreateOrConnectWithoutBattingInningsInput
+  upsert?: Prisma.TeamUpsertWithoutBattingInningsInput
+  connect?: Prisma.TeamWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TeamUpdateToOneWithWhereWithoutBattingInningsInput, Prisma.TeamUpdateWithoutBattingInningsInput>, Prisma.TeamUncheckedUpdateWithoutBattingInningsInput>
+}
+
+export type TeamUpdateOneRequiredWithoutBowlingInningsNestedInput = {
+  create?: Prisma.XOR<Prisma.TeamCreateWithoutBowlingInningsInput, Prisma.TeamUncheckedCreateWithoutBowlingInningsInput>
+  connectOrCreate?: Prisma.TeamCreateOrConnectWithoutBowlingInningsInput
+  upsert?: Prisma.TeamUpsertWithoutBowlingInningsInput
+  connect?: Prisma.TeamWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.TeamUpdateToOneWithWhereWithoutBowlingInningsInput, Prisma.TeamUpdateWithoutBowlingInningsInput>, Prisma.TeamUncheckedUpdateWithoutBowlingInningsInput>
+}
+
 export type TeamCreateWithoutPlayersInput = {
   id?: string
   name: string
@@ -382,6 +494,11 @@ export type TeamCreateWithoutPlayersInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   tournaments?: Prisma.TournamentTeamCreateNestedManyWithoutTeamInput
+  homeMatches?: Prisma.MatchCreateNestedManyWithoutTeamAInput
+  awayMatches?: Prisma.MatchCreateNestedManyWithoutTeamBInput
+  tossWins?: Prisma.MatchCreateNestedManyWithoutTossWinnerInput
+  battingInnings?: Prisma.InningsCreateNestedManyWithoutBattingTeamInput
+  bowlingInnings?: Prisma.InningsCreateNestedManyWithoutBowlingTeamInput
 }
 
 export type TeamUncheckedCreateWithoutPlayersInput = {
@@ -392,6 +509,11 @@ export type TeamUncheckedCreateWithoutPlayersInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   tournaments?: Prisma.TournamentTeamUncheckedCreateNestedManyWithoutTeamInput
+  homeMatches?: Prisma.MatchUncheckedCreateNestedManyWithoutTeamAInput
+  awayMatches?: Prisma.MatchUncheckedCreateNestedManyWithoutTeamBInput
+  tossWins?: Prisma.MatchUncheckedCreateNestedManyWithoutTossWinnerInput
+  battingInnings?: Prisma.InningsUncheckedCreateNestedManyWithoutBattingTeamInput
+  bowlingInnings?: Prisma.InningsUncheckedCreateNestedManyWithoutBowlingTeamInput
 }
 
 export type TeamCreateOrConnectWithoutPlayersInput = {
@@ -418,6 +540,11 @@ export type TeamUpdateWithoutPlayersInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tournaments?: Prisma.TournamentTeamUpdateManyWithoutTeamNestedInput
+  homeMatches?: Prisma.MatchUpdateManyWithoutTeamANestedInput
+  awayMatches?: Prisma.MatchUpdateManyWithoutTeamBNestedInput
+  tossWins?: Prisma.MatchUpdateManyWithoutTossWinnerNestedInput
+  battingInnings?: Prisma.InningsUpdateManyWithoutBattingTeamNestedInput
+  bowlingInnings?: Prisma.InningsUpdateManyWithoutBowlingTeamNestedInput
 }
 
 export type TeamUncheckedUpdateWithoutPlayersInput = {
@@ -428,6 +555,11 @@ export type TeamUncheckedUpdateWithoutPlayersInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tournaments?: Prisma.TournamentTeamUncheckedUpdateManyWithoutTeamNestedInput
+  homeMatches?: Prisma.MatchUncheckedUpdateManyWithoutTeamANestedInput
+  awayMatches?: Prisma.MatchUncheckedUpdateManyWithoutTeamBNestedInput
+  tossWins?: Prisma.MatchUncheckedUpdateManyWithoutTossWinnerNestedInput
+  battingInnings?: Prisma.InningsUncheckedUpdateManyWithoutBattingTeamNestedInput
+  bowlingInnings?: Prisma.InningsUncheckedUpdateManyWithoutBowlingTeamNestedInput
 }
 
 export type TeamCreateWithoutTournamentsInput = {
@@ -438,6 +570,11 @@ export type TeamCreateWithoutTournamentsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   players?: Prisma.TeamPlayerCreateNestedManyWithoutTeamInput
+  homeMatches?: Prisma.MatchCreateNestedManyWithoutTeamAInput
+  awayMatches?: Prisma.MatchCreateNestedManyWithoutTeamBInput
+  tossWins?: Prisma.MatchCreateNestedManyWithoutTossWinnerInput
+  battingInnings?: Prisma.InningsCreateNestedManyWithoutBattingTeamInput
+  bowlingInnings?: Prisma.InningsCreateNestedManyWithoutBowlingTeamInput
 }
 
 export type TeamUncheckedCreateWithoutTournamentsInput = {
@@ -448,6 +585,11 @@ export type TeamUncheckedCreateWithoutTournamentsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   players?: Prisma.TeamPlayerUncheckedCreateNestedManyWithoutTeamInput
+  homeMatches?: Prisma.MatchUncheckedCreateNestedManyWithoutTeamAInput
+  awayMatches?: Prisma.MatchUncheckedCreateNestedManyWithoutTeamBInput
+  tossWins?: Prisma.MatchUncheckedCreateNestedManyWithoutTossWinnerInput
+  battingInnings?: Prisma.InningsUncheckedCreateNestedManyWithoutBattingTeamInput
+  bowlingInnings?: Prisma.InningsUncheckedCreateNestedManyWithoutBowlingTeamInput
 }
 
 export type TeamCreateOrConnectWithoutTournamentsInput = {
@@ -474,6 +616,11 @@ export type TeamUpdateWithoutTournamentsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   players?: Prisma.TeamPlayerUpdateManyWithoutTeamNestedInput
+  homeMatches?: Prisma.MatchUpdateManyWithoutTeamANestedInput
+  awayMatches?: Prisma.MatchUpdateManyWithoutTeamBNestedInput
+  tossWins?: Prisma.MatchUpdateManyWithoutTossWinnerNestedInput
+  battingInnings?: Prisma.InningsUpdateManyWithoutBattingTeamNestedInput
+  bowlingInnings?: Prisma.InningsUpdateManyWithoutBowlingTeamNestedInput
 }
 
 export type TeamUncheckedUpdateWithoutTournamentsInput = {
@@ -484,6 +631,391 @@ export type TeamUncheckedUpdateWithoutTournamentsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   players?: Prisma.TeamPlayerUncheckedUpdateManyWithoutTeamNestedInput
+  homeMatches?: Prisma.MatchUncheckedUpdateManyWithoutTeamANestedInput
+  awayMatches?: Prisma.MatchUncheckedUpdateManyWithoutTeamBNestedInput
+  tossWins?: Prisma.MatchUncheckedUpdateManyWithoutTossWinnerNestedInput
+  battingInnings?: Prisma.InningsUncheckedUpdateManyWithoutBattingTeamNestedInput
+  bowlingInnings?: Prisma.InningsUncheckedUpdateManyWithoutBowlingTeamNestedInput
+}
+
+export type TeamCreateWithoutHomeMatchesInput = {
+  id?: string
+  name: string
+  shortName: string
+  logo?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  players?: Prisma.TeamPlayerCreateNestedManyWithoutTeamInput
+  tournaments?: Prisma.TournamentTeamCreateNestedManyWithoutTeamInput
+  awayMatches?: Prisma.MatchCreateNestedManyWithoutTeamBInput
+  tossWins?: Prisma.MatchCreateNestedManyWithoutTossWinnerInput
+  battingInnings?: Prisma.InningsCreateNestedManyWithoutBattingTeamInput
+  bowlingInnings?: Prisma.InningsCreateNestedManyWithoutBowlingTeamInput
+}
+
+export type TeamUncheckedCreateWithoutHomeMatchesInput = {
+  id?: string
+  name: string
+  shortName: string
+  logo?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  players?: Prisma.TeamPlayerUncheckedCreateNestedManyWithoutTeamInput
+  tournaments?: Prisma.TournamentTeamUncheckedCreateNestedManyWithoutTeamInput
+  awayMatches?: Prisma.MatchUncheckedCreateNestedManyWithoutTeamBInput
+  tossWins?: Prisma.MatchUncheckedCreateNestedManyWithoutTossWinnerInput
+  battingInnings?: Prisma.InningsUncheckedCreateNestedManyWithoutBattingTeamInput
+  bowlingInnings?: Prisma.InningsUncheckedCreateNestedManyWithoutBowlingTeamInput
+}
+
+export type TeamCreateOrConnectWithoutHomeMatchesInput = {
+  where: Prisma.TeamWhereUniqueInput
+  create: Prisma.XOR<Prisma.TeamCreateWithoutHomeMatchesInput, Prisma.TeamUncheckedCreateWithoutHomeMatchesInput>
+}
+
+export type TeamCreateWithoutAwayMatchesInput = {
+  id?: string
+  name: string
+  shortName: string
+  logo?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  players?: Prisma.TeamPlayerCreateNestedManyWithoutTeamInput
+  tournaments?: Prisma.TournamentTeamCreateNestedManyWithoutTeamInput
+  homeMatches?: Prisma.MatchCreateNestedManyWithoutTeamAInput
+  tossWins?: Prisma.MatchCreateNestedManyWithoutTossWinnerInput
+  battingInnings?: Prisma.InningsCreateNestedManyWithoutBattingTeamInput
+  bowlingInnings?: Prisma.InningsCreateNestedManyWithoutBowlingTeamInput
+}
+
+export type TeamUncheckedCreateWithoutAwayMatchesInput = {
+  id?: string
+  name: string
+  shortName: string
+  logo?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  players?: Prisma.TeamPlayerUncheckedCreateNestedManyWithoutTeamInput
+  tournaments?: Prisma.TournamentTeamUncheckedCreateNestedManyWithoutTeamInput
+  homeMatches?: Prisma.MatchUncheckedCreateNestedManyWithoutTeamAInput
+  tossWins?: Prisma.MatchUncheckedCreateNestedManyWithoutTossWinnerInput
+  battingInnings?: Prisma.InningsUncheckedCreateNestedManyWithoutBattingTeamInput
+  bowlingInnings?: Prisma.InningsUncheckedCreateNestedManyWithoutBowlingTeamInput
+}
+
+export type TeamCreateOrConnectWithoutAwayMatchesInput = {
+  where: Prisma.TeamWhereUniqueInput
+  create: Prisma.XOR<Prisma.TeamCreateWithoutAwayMatchesInput, Prisma.TeamUncheckedCreateWithoutAwayMatchesInput>
+}
+
+export type TeamCreateWithoutTossWinsInput = {
+  id?: string
+  name: string
+  shortName: string
+  logo?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  players?: Prisma.TeamPlayerCreateNestedManyWithoutTeamInput
+  tournaments?: Prisma.TournamentTeamCreateNestedManyWithoutTeamInput
+  homeMatches?: Prisma.MatchCreateNestedManyWithoutTeamAInput
+  awayMatches?: Prisma.MatchCreateNestedManyWithoutTeamBInput
+  battingInnings?: Prisma.InningsCreateNestedManyWithoutBattingTeamInput
+  bowlingInnings?: Prisma.InningsCreateNestedManyWithoutBowlingTeamInput
+}
+
+export type TeamUncheckedCreateWithoutTossWinsInput = {
+  id?: string
+  name: string
+  shortName: string
+  logo?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  players?: Prisma.TeamPlayerUncheckedCreateNestedManyWithoutTeamInput
+  tournaments?: Prisma.TournamentTeamUncheckedCreateNestedManyWithoutTeamInput
+  homeMatches?: Prisma.MatchUncheckedCreateNestedManyWithoutTeamAInput
+  awayMatches?: Prisma.MatchUncheckedCreateNestedManyWithoutTeamBInput
+  battingInnings?: Prisma.InningsUncheckedCreateNestedManyWithoutBattingTeamInput
+  bowlingInnings?: Prisma.InningsUncheckedCreateNestedManyWithoutBowlingTeamInput
+}
+
+export type TeamCreateOrConnectWithoutTossWinsInput = {
+  where: Prisma.TeamWhereUniqueInput
+  create: Prisma.XOR<Prisma.TeamCreateWithoutTossWinsInput, Prisma.TeamUncheckedCreateWithoutTossWinsInput>
+}
+
+export type TeamUpsertWithoutHomeMatchesInput = {
+  update: Prisma.XOR<Prisma.TeamUpdateWithoutHomeMatchesInput, Prisma.TeamUncheckedUpdateWithoutHomeMatchesInput>
+  create: Prisma.XOR<Prisma.TeamCreateWithoutHomeMatchesInput, Prisma.TeamUncheckedCreateWithoutHomeMatchesInput>
+  where?: Prisma.TeamWhereInput
+}
+
+export type TeamUpdateToOneWithWhereWithoutHomeMatchesInput = {
+  where?: Prisma.TeamWhereInput
+  data: Prisma.XOR<Prisma.TeamUpdateWithoutHomeMatchesInput, Prisma.TeamUncheckedUpdateWithoutHomeMatchesInput>
+}
+
+export type TeamUpdateWithoutHomeMatchesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  shortName?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  players?: Prisma.TeamPlayerUpdateManyWithoutTeamNestedInput
+  tournaments?: Prisma.TournamentTeamUpdateManyWithoutTeamNestedInput
+  awayMatches?: Prisma.MatchUpdateManyWithoutTeamBNestedInput
+  tossWins?: Prisma.MatchUpdateManyWithoutTossWinnerNestedInput
+  battingInnings?: Prisma.InningsUpdateManyWithoutBattingTeamNestedInput
+  bowlingInnings?: Prisma.InningsUpdateManyWithoutBowlingTeamNestedInput
+}
+
+export type TeamUncheckedUpdateWithoutHomeMatchesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  shortName?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  players?: Prisma.TeamPlayerUncheckedUpdateManyWithoutTeamNestedInput
+  tournaments?: Prisma.TournamentTeamUncheckedUpdateManyWithoutTeamNestedInput
+  awayMatches?: Prisma.MatchUncheckedUpdateManyWithoutTeamBNestedInput
+  tossWins?: Prisma.MatchUncheckedUpdateManyWithoutTossWinnerNestedInput
+  battingInnings?: Prisma.InningsUncheckedUpdateManyWithoutBattingTeamNestedInput
+  bowlingInnings?: Prisma.InningsUncheckedUpdateManyWithoutBowlingTeamNestedInput
+}
+
+export type TeamUpsertWithoutAwayMatchesInput = {
+  update: Prisma.XOR<Prisma.TeamUpdateWithoutAwayMatchesInput, Prisma.TeamUncheckedUpdateWithoutAwayMatchesInput>
+  create: Prisma.XOR<Prisma.TeamCreateWithoutAwayMatchesInput, Prisma.TeamUncheckedCreateWithoutAwayMatchesInput>
+  where?: Prisma.TeamWhereInput
+}
+
+export type TeamUpdateToOneWithWhereWithoutAwayMatchesInput = {
+  where?: Prisma.TeamWhereInput
+  data: Prisma.XOR<Prisma.TeamUpdateWithoutAwayMatchesInput, Prisma.TeamUncheckedUpdateWithoutAwayMatchesInput>
+}
+
+export type TeamUpdateWithoutAwayMatchesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  shortName?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  players?: Prisma.TeamPlayerUpdateManyWithoutTeamNestedInput
+  tournaments?: Prisma.TournamentTeamUpdateManyWithoutTeamNestedInput
+  homeMatches?: Prisma.MatchUpdateManyWithoutTeamANestedInput
+  tossWins?: Prisma.MatchUpdateManyWithoutTossWinnerNestedInput
+  battingInnings?: Prisma.InningsUpdateManyWithoutBattingTeamNestedInput
+  bowlingInnings?: Prisma.InningsUpdateManyWithoutBowlingTeamNestedInput
+}
+
+export type TeamUncheckedUpdateWithoutAwayMatchesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  shortName?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  players?: Prisma.TeamPlayerUncheckedUpdateManyWithoutTeamNestedInput
+  tournaments?: Prisma.TournamentTeamUncheckedUpdateManyWithoutTeamNestedInput
+  homeMatches?: Prisma.MatchUncheckedUpdateManyWithoutTeamANestedInput
+  tossWins?: Prisma.MatchUncheckedUpdateManyWithoutTossWinnerNestedInput
+  battingInnings?: Prisma.InningsUncheckedUpdateManyWithoutBattingTeamNestedInput
+  bowlingInnings?: Prisma.InningsUncheckedUpdateManyWithoutBowlingTeamNestedInput
+}
+
+export type TeamUpsertWithoutTossWinsInput = {
+  update: Prisma.XOR<Prisma.TeamUpdateWithoutTossWinsInput, Prisma.TeamUncheckedUpdateWithoutTossWinsInput>
+  create: Prisma.XOR<Prisma.TeamCreateWithoutTossWinsInput, Prisma.TeamUncheckedCreateWithoutTossWinsInput>
+  where?: Prisma.TeamWhereInput
+}
+
+export type TeamUpdateToOneWithWhereWithoutTossWinsInput = {
+  where?: Prisma.TeamWhereInput
+  data: Prisma.XOR<Prisma.TeamUpdateWithoutTossWinsInput, Prisma.TeamUncheckedUpdateWithoutTossWinsInput>
+}
+
+export type TeamUpdateWithoutTossWinsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  shortName?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  players?: Prisma.TeamPlayerUpdateManyWithoutTeamNestedInput
+  tournaments?: Prisma.TournamentTeamUpdateManyWithoutTeamNestedInput
+  homeMatches?: Prisma.MatchUpdateManyWithoutTeamANestedInput
+  awayMatches?: Prisma.MatchUpdateManyWithoutTeamBNestedInput
+  battingInnings?: Prisma.InningsUpdateManyWithoutBattingTeamNestedInput
+  bowlingInnings?: Prisma.InningsUpdateManyWithoutBowlingTeamNestedInput
+}
+
+export type TeamUncheckedUpdateWithoutTossWinsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  shortName?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  players?: Prisma.TeamPlayerUncheckedUpdateManyWithoutTeamNestedInput
+  tournaments?: Prisma.TournamentTeamUncheckedUpdateManyWithoutTeamNestedInput
+  homeMatches?: Prisma.MatchUncheckedUpdateManyWithoutTeamANestedInput
+  awayMatches?: Prisma.MatchUncheckedUpdateManyWithoutTeamBNestedInput
+  battingInnings?: Prisma.InningsUncheckedUpdateManyWithoutBattingTeamNestedInput
+  bowlingInnings?: Prisma.InningsUncheckedUpdateManyWithoutBowlingTeamNestedInput
+}
+
+export type TeamCreateWithoutBattingInningsInput = {
+  id?: string
+  name: string
+  shortName: string
+  logo?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  players?: Prisma.TeamPlayerCreateNestedManyWithoutTeamInput
+  tournaments?: Prisma.TournamentTeamCreateNestedManyWithoutTeamInput
+  homeMatches?: Prisma.MatchCreateNestedManyWithoutTeamAInput
+  awayMatches?: Prisma.MatchCreateNestedManyWithoutTeamBInput
+  tossWins?: Prisma.MatchCreateNestedManyWithoutTossWinnerInput
+  bowlingInnings?: Prisma.InningsCreateNestedManyWithoutBowlingTeamInput
+}
+
+export type TeamUncheckedCreateWithoutBattingInningsInput = {
+  id?: string
+  name: string
+  shortName: string
+  logo?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  players?: Prisma.TeamPlayerUncheckedCreateNestedManyWithoutTeamInput
+  tournaments?: Prisma.TournamentTeamUncheckedCreateNestedManyWithoutTeamInput
+  homeMatches?: Prisma.MatchUncheckedCreateNestedManyWithoutTeamAInput
+  awayMatches?: Prisma.MatchUncheckedCreateNestedManyWithoutTeamBInput
+  tossWins?: Prisma.MatchUncheckedCreateNestedManyWithoutTossWinnerInput
+  bowlingInnings?: Prisma.InningsUncheckedCreateNestedManyWithoutBowlingTeamInput
+}
+
+export type TeamCreateOrConnectWithoutBattingInningsInput = {
+  where: Prisma.TeamWhereUniqueInput
+  create: Prisma.XOR<Prisma.TeamCreateWithoutBattingInningsInput, Prisma.TeamUncheckedCreateWithoutBattingInningsInput>
+}
+
+export type TeamCreateWithoutBowlingInningsInput = {
+  id?: string
+  name: string
+  shortName: string
+  logo?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  players?: Prisma.TeamPlayerCreateNestedManyWithoutTeamInput
+  tournaments?: Prisma.TournamentTeamCreateNestedManyWithoutTeamInput
+  homeMatches?: Prisma.MatchCreateNestedManyWithoutTeamAInput
+  awayMatches?: Prisma.MatchCreateNestedManyWithoutTeamBInput
+  tossWins?: Prisma.MatchCreateNestedManyWithoutTossWinnerInput
+  battingInnings?: Prisma.InningsCreateNestedManyWithoutBattingTeamInput
+}
+
+export type TeamUncheckedCreateWithoutBowlingInningsInput = {
+  id?: string
+  name: string
+  shortName: string
+  logo?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  players?: Prisma.TeamPlayerUncheckedCreateNestedManyWithoutTeamInput
+  tournaments?: Prisma.TournamentTeamUncheckedCreateNestedManyWithoutTeamInput
+  homeMatches?: Prisma.MatchUncheckedCreateNestedManyWithoutTeamAInput
+  awayMatches?: Prisma.MatchUncheckedCreateNestedManyWithoutTeamBInput
+  tossWins?: Prisma.MatchUncheckedCreateNestedManyWithoutTossWinnerInput
+  battingInnings?: Prisma.InningsUncheckedCreateNestedManyWithoutBattingTeamInput
+}
+
+export type TeamCreateOrConnectWithoutBowlingInningsInput = {
+  where: Prisma.TeamWhereUniqueInput
+  create: Prisma.XOR<Prisma.TeamCreateWithoutBowlingInningsInput, Prisma.TeamUncheckedCreateWithoutBowlingInningsInput>
+}
+
+export type TeamUpsertWithoutBattingInningsInput = {
+  update: Prisma.XOR<Prisma.TeamUpdateWithoutBattingInningsInput, Prisma.TeamUncheckedUpdateWithoutBattingInningsInput>
+  create: Prisma.XOR<Prisma.TeamCreateWithoutBattingInningsInput, Prisma.TeamUncheckedCreateWithoutBattingInningsInput>
+  where?: Prisma.TeamWhereInput
+}
+
+export type TeamUpdateToOneWithWhereWithoutBattingInningsInput = {
+  where?: Prisma.TeamWhereInput
+  data: Prisma.XOR<Prisma.TeamUpdateWithoutBattingInningsInput, Prisma.TeamUncheckedUpdateWithoutBattingInningsInput>
+}
+
+export type TeamUpdateWithoutBattingInningsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  shortName?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  players?: Prisma.TeamPlayerUpdateManyWithoutTeamNestedInput
+  tournaments?: Prisma.TournamentTeamUpdateManyWithoutTeamNestedInput
+  homeMatches?: Prisma.MatchUpdateManyWithoutTeamANestedInput
+  awayMatches?: Prisma.MatchUpdateManyWithoutTeamBNestedInput
+  tossWins?: Prisma.MatchUpdateManyWithoutTossWinnerNestedInput
+  bowlingInnings?: Prisma.InningsUpdateManyWithoutBowlingTeamNestedInput
+}
+
+export type TeamUncheckedUpdateWithoutBattingInningsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  shortName?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  players?: Prisma.TeamPlayerUncheckedUpdateManyWithoutTeamNestedInput
+  tournaments?: Prisma.TournamentTeamUncheckedUpdateManyWithoutTeamNestedInput
+  homeMatches?: Prisma.MatchUncheckedUpdateManyWithoutTeamANestedInput
+  awayMatches?: Prisma.MatchUncheckedUpdateManyWithoutTeamBNestedInput
+  tossWins?: Prisma.MatchUncheckedUpdateManyWithoutTossWinnerNestedInput
+  bowlingInnings?: Prisma.InningsUncheckedUpdateManyWithoutBowlingTeamNestedInput
+}
+
+export type TeamUpsertWithoutBowlingInningsInput = {
+  update: Prisma.XOR<Prisma.TeamUpdateWithoutBowlingInningsInput, Prisma.TeamUncheckedUpdateWithoutBowlingInningsInput>
+  create: Prisma.XOR<Prisma.TeamCreateWithoutBowlingInningsInput, Prisma.TeamUncheckedCreateWithoutBowlingInningsInput>
+  where?: Prisma.TeamWhereInput
+}
+
+export type TeamUpdateToOneWithWhereWithoutBowlingInningsInput = {
+  where?: Prisma.TeamWhereInput
+  data: Prisma.XOR<Prisma.TeamUpdateWithoutBowlingInningsInput, Prisma.TeamUncheckedUpdateWithoutBowlingInningsInput>
+}
+
+export type TeamUpdateWithoutBowlingInningsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  shortName?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  players?: Prisma.TeamPlayerUpdateManyWithoutTeamNestedInput
+  tournaments?: Prisma.TournamentTeamUpdateManyWithoutTeamNestedInput
+  homeMatches?: Prisma.MatchUpdateManyWithoutTeamANestedInput
+  awayMatches?: Prisma.MatchUpdateManyWithoutTeamBNestedInput
+  tossWins?: Prisma.MatchUpdateManyWithoutTossWinnerNestedInput
+  battingInnings?: Prisma.InningsUpdateManyWithoutBattingTeamNestedInput
+}
+
+export type TeamUncheckedUpdateWithoutBowlingInningsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  shortName?: Prisma.StringFieldUpdateOperationsInput | string
+  logo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  players?: Prisma.TeamPlayerUncheckedUpdateManyWithoutTeamNestedInput
+  tournaments?: Prisma.TournamentTeamUncheckedUpdateManyWithoutTeamNestedInput
+  homeMatches?: Prisma.MatchUncheckedUpdateManyWithoutTeamANestedInput
+  awayMatches?: Prisma.MatchUncheckedUpdateManyWithoutTeamBNestedInput
+  tossWins?: Prisma.MatchUncheckedUpdateManyWithoutTossWinnerNestedInput
+  battingInnings?: Prisma.InningsUncheckedUpdateManyWithoutBattingTeamNestedInput
 }
 
 
@@ -494,11 +1026,21 @@ export type TeamUncheckedUpdateWithoutTournamentsInput = {
 export type TeamCountOutputType = {
   players: number
   tournaments: number
+  homeMatches: number
+  awayMatches: number
+  tossWins: number
+  battingInnings: number
+  bowlingInnings: number
 }
 
 export type TeamCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   players?: boolean | TeamCountOutputTypeCountPlayersArgs
   tournaments?: boolean | TeamCountOutputTypeCountTournamentsArgs
+  homeMatches?: boolean | TeamCountOutputTypeCountHomeMatchesArgs
+  awayMatches?: boolean | TeamCountOutputTypeCountAwayMatchesArgs
+  tossWins?: boolean | TeamCountOutputTypeCountTossWinsArgs
+  battingInnings?: boolean | TeamCountOutputTypeCountBattingInningsArgs
+  bowlingInnings?: boolean | TeamCountOutputTypeCountBowlingInningsArgs
 }
 
 /**
@@ -525,6 +1067,41 @@ export type TeamCountOutputTypeCountTournamentsArgs<ExtArgs extends runtime.Type
   where?: Prisma.TournamentTeamWhereInput
 }
 
+/**
+ * TeamCountOutputType without action
+ */
+export type TeamCountOutputTypeCountHomeMatchesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MatchWhereInput
+}
+
+/**
+ * TeamCountOutputType without action
+ */
+export type TeamCountOutputTypeCountAwayMatchesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MatchWhereInput
+}
+
+/**
+ * TeamCountOutputType without action
+ */
+export type TeamCountOutputTypeCountTossWinsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MatchWhereInput
+}
+
+/**
+ * TeamCountOutputType without action
+ */
+export type TeamCountOutputTypeCountBattingInningsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.InningsWhereInput
+}
+
+/**
+ * TeamCountOutputType without action
+ */
+export type TeamCountOutputTypeCountBowlingInningsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.InningsWhereInput
+}
+
 
 export type TeamSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -535,6 +1112,11 @@ export type TeamSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   updatedAt?: boolean
   players?: boolean | Prisma.Team$playersArgs<ExtArgs>
   tournaments?: boolean | Prisma.Team$tournamentsArgs<ExtArgs>
+  homeMatches?: boolean | Prisma.Team$homeMatchesArgs<ExtArgs>
+  awayMatches?: boolean | Prisma.Team$awayMatchesArgs<ExtArgs>
+  tossWins?: boolean | Prisma.Team$tossWinsArgs<ExtArgs>
+  battingInnings?: boolean | Prisma.Team$battingInningsArgs<ExtArgs>
+  bowlingInnings?: boolean | Prisma.Team$bowlingInningsArgs<ExtArgs>
   _count?: boolean | Prisma.TeamCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["team"]>
 
@@ -569,6 +1151,11 @@ export type TeamOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = run
 export type TeamInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   players?: boolean | Prisma.Team$playersArgs<ExtArgs>
   tournaments?: boolean | Prisma.Team$tournamentsArgs<ExtArgs>
+  homeMatches?: boolean | Prisma.Team$homeMatchesArgs<ExtArgs>
+  awayMatches?: boolean | Prisma.Team$awayMatchesArgs<ExtArgs>
+  tossWins?: boolean | Prisma.Team$tossWinsArgs<ExtArgs>
+  battingInnings?: boolean | Prisma.Team$battingInningsArgs<ExtArgs>
+  bowlingInnings?: boolean | Prisma.Team$bowlingInningsArgs<ExtArgs>
   _count?: boolean | Prisma.TeamCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type TeamIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -579,6 +1166,11 @@ export type $TeamPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   objects: {
     players: Prisma.$TeamPlayerPayload<ExtArgs>[]
     tournaments: Prisma.$TournamentTeamPayload<ExtArgs>[]
+    homeMatches: Prisma.$MatchPayload<ExtArgs>[]
+    awayMatches: Prisma.$MatchPayload<ExtArgs>[]
+    tossWins: Prisma.$MatchPayload<ExtArgs>[]
+    battingInnings: Prisma.$InningsPayload<ExtArgs>[]
+    bowlingInnings: Prisma.$InningsPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -983,6 +1575,11 @@ export interface Prisma__TeamClient<T, Null = never, ExtArgs extends runtime.Typ
   readonly [Symbol.toStringTag]: "PrismaPromise"
   players<T extends Prisma.Team$playersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Team$playersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TeamPlayerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   tournaments<T extends Prisma.Team$tournamentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Team$tournamentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TournamentTeamPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  homeMatches<T extends Prisma.Team$homeMatchesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Team$homeMatchesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MatchPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  awayMatches<T extends Prisma.Team$awayMatchesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Team$awayMatchesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MatchPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  tossWins<T extends Prisma.Team$tossWinsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Team$tossWinsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MatchPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  battingInnings<T extends Prisma.Team$battingInningsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Team$battingInningsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InningsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  bowlingInnings<T extends Prisma.Team$bowlingInningsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Team$bowlingInningsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InningsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1456,6 +2053,126 @@ export type Team$tournamentsArgs<ExtArgs extends runtime.Types.Extensions.Intern
   take?: number
   skip?: number
   distinct?: Prisma.TournamentTeamScalarFieldEnum | Prisma.TournamentTeamScalarFieldEnum[]
+}
+
+/**
+ * Team.homeMatches
+ */
+export type Team$homeMatchesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Match
+   */
+  select?: Prisma.MatchSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Match
+   */
+  omit?: Prisma.MatchOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MatchInclude<ExtArgs> | null
+  where?: Prisma.MatchWhereInput
+  orderBy?: Prisma.MatchOrderByWithRelationInput | Prisma.MatchOrderByWithRelationInput[]
+  cursor?: Prisma.MatchWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MatchScalarFieldEnum | Prisma.MatchScalarFieldEnum[]
+}
+
+/**
+ * Team.awayMatches
+ */
+export type Team$awayMatchesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Match
+   */
+  select?: Prisma.MatchSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Match
+   */
+  omit?: Prisma.MatchOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MatchInclude<ExtArgs> | null
+  where?: Prisma.MatchWhereInput
+  orderBy?: Prisma.MatchOrderByWithRelationInput | Prisma.MatchOrderByWithRelationInput[]
+  cursor?: Prisma.MatchWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MatchScalarFieldEnum | Prisma.MatchScalarFieldEnum[]
+}
+
+/**
+ * Team.tossWins
+ */
+export type Team$tossWinsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Match
+   */
+  select?: Prisma.MatchSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Match
+   */
+  omit?: Prisma.MatchOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MatchInclude<ExtArgs> | null
+  where?: Prisma.MatchWhereInput
+  orderBy?: Prisma.MatchOrderByWithRelationInput | Prisma.MatchOrderByWithRelationInput[]
+  cursor?: Prisma.MatchWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MatchScalarFieldEnum | Prisma.MatchScalarFieldEnum[]
+}
+
+/**
+ * Team.battingInnings
+ */
+export type Team$battingInningsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Innings
+   */
+  select?: Prisma.InningsSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Innings
+   */
+  omit?: Prisma.InningsOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.InningsInclude<ExtArgs> | null
+  where?: Prisma.InningsWhereInput
+  orderBy?: Prisma.InningsOrderByWithRelationInput | Prisma.InningsOrderByWithRelationInput[]
+  cursor?: Prisma.InningsWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.InningsScalarFieldEnum | Prisma.InningsScalarFieldEnum[]
+}
+
+/**
+ * Team.bowlingInnings
+ */
+export type Team$bowlingInningsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Innings
+   */
+  select?: Prisma.InningsSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Innings
+   */
+  omit?: Prisma.InningsOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.InningsInclude<ExtArgs> | null
+  where?: Prisma.InningsWhereInput
+  orderBy?: Prisma.InningsOrderByWithRelationInput | Prisma.InningsOrderByWithRelationInput[]
+  cursor?: Prisma.InningsWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.InningsScalarFieldEnum | Prisma.InningsScalarFieldEnum[]
 }
 
 /**

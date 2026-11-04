@@ -36,3 +36,43 @@ export const PlayerRole = {
 } as const
 
 export type PlayerRole = (typeof PlayerRole)[keyof typeof PlayerRole]
+
+
+export const MatchStatus = {
+  SCHEDULED: 'SCHEDULED',
+  LIVE: 'LIVE',
+  COMPLETED: 'COMPLETED',
+  ABANDONED: 'ABANDONED',
+  CANCELLED: 'CANCELLED'
+} as const
+
+export type MatchStatus = (typeof MatchStatus)[keyof typeof MatchStatus]
+
+
+export const MatchFormat = {
+  T10: 'T10',
+  T20: 'T20',
+  ODI: 'ODI',
+  TEST: 'TEST',
+  CUSTOM: 'CUSTOM'
+} as const
+
+export type MatchFormat = (typeof MatchFormat)[keyof typeof MatchFormat]
+
+
+export const TossDecision = {
+  BAT: 'BAT',
+  FIELD: 'FIELD'
+} as const
+
+export type TossDecision = (typeof TossDecision)[keyof typeof TossDecision]
+
+
+export const InningsStatus = {
+  NOT_STARTED: 'NOT_STARTED',
+  IN_PROGRESS: 'IN_PROGRESS',
+  COMPLETED: 'COMPLETED',
+  DECLARED: 'DECLARED'
+} as const
+
+export type InningsStatus = (typeof InningsStatus)[keyof typeof InningsStatus]

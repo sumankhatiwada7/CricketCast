@@ -32,6 +32,7 @@ services:
 
     container_name: cricketcast_backend
     restart: unless-stopped
+    user: "1000:1000"
 
     environment:
       NODE_ENV: development
