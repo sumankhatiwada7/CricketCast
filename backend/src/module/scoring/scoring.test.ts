@@ -121,7 +121,8 @@ describe("updatedBatterScore", () => {
     const result = updatedBatterScore(initialBatterScore, {
       batsmanRuns: 2,
     });
-    expect(result.runs).toBe(2), expect(result.ballsFaced).toBe(1);
+    expect(result.runs).toBe(2);
+    expect(result.ballsFaced).toBe(1);
   });
   it("should increase fours when batter hits a four", () => {
     const result = updatedBatterScore(initialBatterScore, {
