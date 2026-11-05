@@ -1,12 +1,6 @@
 name: CricketCast CI
 
 on:
-  push:
-    branches:
-      - main
-      - "feature/**"
-      - "feat/**"
-
   pull_request:
     branches:
       - main
