@@ -1,4 +1,4 @@
-import type{BallEvent,BatterScore,InningsScore,BowlerScore,ExtrasScore, ProcessDeliveryInput, DeliveryResult}from "./scoring.type.js";
+import type{BallEvent,BatterScore,InningsScore,BowlerScore,ExtrasScore, ProcessDeliveryInput, DeliveryResult,InningsState}from "./scoring.type.js";
 
 export const calculateDelivery = (currentscore: InningsScore,event:BallEvent): InningsScore => {
    
@@ -30,7 +30,8 @@ export const updatedBatterScore = (batter: BatterScore, event: BallEvent): Batte
     return{
         ...batter,
         runs: batter.runs + event.batsmanRuns,
-        ballsFaced: batter.ballsFaced + (iswide ? 0 : 1),
+        ballsFaced: batter.ballsFaced +
+  (event.extraType === "WIDE" || event.extraType === "NO_BALL" ? 0 : 1),
         fours: batter.fours + (event.batsmanRuns === 4 ? 1 : 0),
         sixes: batter.sixes + (event.batsmanRuns === 6 ? 1 : 0),
     }
@@ -121,10 +122,131 @@ export const processDelivery = (
 ): DeliveryResult => {
   const { innings, batter, bowler, extras, event } = input;
 
+  if (!validateDelivery(event)) {
+    throw new Error("Invalid delivery event");
+  }
+
   return {
     innings: calculateDelivery(innings, event),
     batter: updatedBatterScore(batter, event),
     bowler: updateBowlerScore(bowler, event),
     extras: updateExtrasScore(extras, event),
+  };
+};
+
+export const validateDelivery = (event: BallEvent): boolean => {
+  if (!Number.isInteger(event.batsmanRuns) || event.batsmanRuns < 0) {
+    return false;
+  }
+
+  const extraRuns = event.extraRuns ?? 0;
+
+  if (!Number.isInteger(extraRuns) || extraRuns < 0) {
+    return false;
+  }
+
+  return true;
+};
+
+export const createInningsState = (
+  strikerId: string,
+  nonStrikerId: string,
+  currentBowlerId: string,
+  totalOvers: number,
+  totalWickets: number,
+): InningsState => {
+  return {
+    innings: {
+      runs: 0,
+      wickets: 0,
+      legalBalls: 0,
+    },
+    strikerId,
+    nonStrikerId,
+    currentBowlerId,
+    totalOvers,
+    totalWickets,
+    isCompleted: false,
+  };
+};
+
+export const isInningsCompleted = (
+  state: InningsState,
+): boolean => {
+  const allOut = state.innings.wickets >= state.totalWickets;
+
+  const oversCompleted =
+    state.innings.legalBalls >= state.totalOvers * 6;
+
+  return allOut || oversCompleted;
+};
+
+
+export const updateInningsStatus = (
+  state: InningsState,
+): InningsState => {
+  return {
+    ...state,
+    isCompleted: isInningsCompleted(state),
+  };
+};
+
+export const rotateStrike = (
+  state: InningsState,
+): InningsState => {
+  return {
+    ...state,
+    strikerId: state.nonStrikerId,
+    nonStrikerId: state.strikerId,
+  };
+};
+
+export const shouldRotateStrike = (runs: number): boolean => {
+  return runs % 2 !== 0;
+};
+
+export const isOverCompleted = (legalBalls: number): boolean => {
+  return legalBalls > 0 && legalBalls % 6 === 0;
+};
+
+
+export const shouldRotateStrikeAfterDelivery = (
+  runs: number,
+  legalBalls: number,
+): boolean => {
+  return shouldRotateStrike(runs) || isOverCompleted(legalBalls);
+};
+
+export const processStrikeRotation = (
+  state: InningsState,
+  completedRuns: number,
+): InningsState => {
+  if (
+    shouldRotateStrikeAfterDelivery(
+      completedRuns,
+      state.innings.legalBalls,
+    )
+  ) {
+    return rotateStrike(state);
+  }
+
+  return state;
+};
+
+export const changeBowler = (
+  state: InningsState,
+  newBowlerId: string,
+): InningsState => {
+  if (!isOverCompleted(state.innings.legalBalls)) {
+    throw new Error("Cannot change bowler before over completion");
+  }
+
+  if (state.currentBowlerId === newBowlerId) {
+    throw new Error("A bowler cannot bowl consecutive overs");
+  }
+
+  return {
+    ...state,
+    currentBowlerId: newBowlerId,
   };
 };
