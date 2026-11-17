@@ -61,3 +61,16 @@ export interface ProcessDeliveryInput {
   extras: ExtrasScore;
   event: BallEvent;
 }
+
+export interface InningsState {
+  innings: InningsScore;
+
+  strikerId: string;
+  nonStrikerId: string;
+  currentBowlerId: string;
+
+  totalOvers: number;
+  totalWickets: number;
+
+  isCompleted: boolean;
+}
